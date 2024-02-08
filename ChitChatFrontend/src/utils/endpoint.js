@@ -1,2 +1,3 @@
-export const SIGNIN = '/api/auth/signin/'
-export const SIGNUP = '/api/auth/signup/'
+export const SIGNIN = '/api/user/signin/'
+export const SIGNUP = '/api/user/signup/'
+export const USERNAME_AVAILABILITY = "/api/user/username-availability/"

@@ -2,10 +2,13 @@ import { useLayoutEffect, useState } from "react";
 import { 
     Keyboard,
     KeyboardAvoidingView,
+    Platform,
     SafeAreaView, 
     Text, 
+    ToastAndroid, 
     TouchableWithoutFeedback, 
-    View 
+    View,
+    AlertIOS
 } from "react-native";
 import Title from "../common/Title";
 import Input from "../common/Input";
@@ -65,8 +68,16 @@ function SignInScreen({ navigation }){
                 username: username,
                 password: password
             }
-            utils.log("Sign in: ", response.data)
-            login(credentials, response.data.user)
+            if(response.data.status == 200){
+                utils.log("Sign in: ", response.data)
+                login(credentials, response.data.user)
+            }else{
+                if (Platform.OS === 'android') {
+                    ToastAndroid.show(response.data.message, ToastAndroid.SHORT)
+                  } else {
+                    AlertIOS.alert(response.data.message);
+                  }
+            }
         })
         .catch(error =>{
             console.log("in sign in error ")
