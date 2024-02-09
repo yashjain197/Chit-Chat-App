@@ -70,6 +70,7 @@ function SignInScreen({ navigation }){
             }
             if(response.data.status == 200){
                 utils.log("Sign in: ", response.data)
+                console.log(response.data.user)
                 login(credentials, response.data.user)
             }else{
                 if (Platform.OS === 'android') {

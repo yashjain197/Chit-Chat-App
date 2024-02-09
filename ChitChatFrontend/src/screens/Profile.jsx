@@ -1,6 +1,55 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import useGlobal from "../core/global";
+import {launchImageLibrary} from 'react-native-image-picker';
+import utils from "../core/utils";
+
+function ProfileImage(){
+    return(
+        <TouchableOpacity 
+        style = {{
+            marginBottom: 20
+        }}
+        onPress={()=>{
+            launchImageLibrary({ includeBase64: true }, (response)=>{
+                utils.log("launchImageLibrary", response)
+
+                if(response.didCancel) return 
+
+                const file = response.assets[0]
+                //... Upload image
+                
+            })
+        }}
+        >
+            <Image 
+                source={require('../assets/profile.png')} 
+                style = {{width: 180, height: 180, borderRadius: 90, backgroundColor: '#e0e0e0'}}>
+            </Image>
+            <View
+                style = {{
+                    position: 'absolute',
+                    bottom: 0,
+                    right: 0,
+                    backgroundColor: '#202020',
+                    width: 40,
+                    height: 40,
+                    borderRadius: 20,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderWidth: 3,
+                    borderColor: 'white'
+                }}
+            >
+                <FontAwesomeIcon
+                icon='pencil'
+                size = {15}
+                color = '#d0d0d0'
+                />
+            </View>
+        </TouchableOpacity>
+    )
+}
 
 function ProfileLogout() {
     const logout = useGlobal(state => state.logout)
@@ -49,10 +98,9 @@ function ProfileScreen(){
             }}
         >
 
-            <Image 
-                source={require('../assets/profile.png')} 
-                style = {{width: 180, height: 180, borderRadius: 90, backgroundColor: '#e0e0e0', marginBottom: 20}}>
-            </Image>
+            <ProfileImage/>
+
+            
 
             <Text
             style={{

@@ -40,7 +40,13 @@ class SigninView(APIView):
             return Response(output, status=status.HTTP_200_OK)
         
         user_data = get_auth_for_user(user)
-        return Response(user_data)
+
+        output = {
+                "success": True,
+                "status":200,
+                "user" : user_data['user']
+            }
+        return Response(output, status=status.HTTP_200_OK)
 
 class SignupView(APIView):
     permission_classes = [AllowAny]

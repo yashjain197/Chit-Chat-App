@@ -5,6 +5,7 @@ import Button from "../common/Button";
 import api from "../core/api";
 import useGlobal from "../core/global";
 import { SIGNUP, USERNAME_AVAILABILITY } from "../utils/endpoint";
+import utils from "../core/utils";
 
 
 function SignUpScreen({ navigation }) {
@@ -117,7 +118,7 @@ function SignUpScreen({ navigation }) {
 
         //checking if username is available
         if (!isUsernameAvailable) {
-            //checking again if user have changed the username
+            // checking again if user have changed the username
             const usernameAvailability = await onUsernameBlurHandler()
             if (!usernameAvailability) {
                 return
@@ -140,6 +141,7 @@ function SignUpScreen({ navigation }) {
                     password: password1
                 }
                 utils.log("Sign up: ", response.data)
+                console.log(response.data.user)
                 login(credentials, response.data.user)
             })
             .catch(error => {
