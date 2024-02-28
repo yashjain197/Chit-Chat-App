@@ -41,7 +41,27 @@ REST_FRAMEWORK = {
     ]
 }
 
+
+
+# Thumbnail uploads
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = '/media/'
+
+# Channels
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG' : {
+            'host': [('127.0.0.1', 6379)]
+        }
+    }
+}
+
+# Daphne
+ASGI_APPLICATION = 'ChitChatBackend.asgi.application'
+
 INSTALLED_APPS = [
+    'daphne',
     'rest_framework',
     'rest_framework_simplejwt',
     "django.contrib.admin",
