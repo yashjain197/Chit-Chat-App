@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/4.2/howto/deployment/asgi/
 """
 
 import os
-# import chat.routing
+import chat.routing
 from channels.layers import get_channel_layer
 
 from channels.routing import ProtocolTypeRouter, URLRouter
@@ -21,5 +21,10 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ChitChatBackend.settings")
 
 django_asgi_app = get_asgi_application()
 application = ProtocolTypeRouter({
-    'http' : django_asgi_app
+    'http' : django_asgi_app,
+    'websocket': AllowedHostOriginValidator(
+        JWTAuthMiddlewareStack(
+            URLRouter(chat.routing.websocket_urlpatterns)
+        )
+    )   
 })

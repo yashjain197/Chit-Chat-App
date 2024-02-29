@@ -58,7 +58,7 @@ CHANNEL_LAYERS = {
 }
 
 # Daphne
-ASGI_APPLICATION = 'ChitChatBackend.asgi.application'
+ASGI_APPLICATION = 'ChitChatBackend.settings'
 
 INSTALLED_APPS = [
     'daphne',
