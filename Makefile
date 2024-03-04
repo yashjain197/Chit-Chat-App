@@ -5,4 +5,4 @@ run-android:
 	cd ChitChatFrontend && npm start
 
 server:
-	 cd ChitChatBackend && source venv/bin/activate && python3 manage.py runserver 0.0.0.0:8000
+	 cd ChitChatBackend && source venv/bin/activate && python3 manage.py runserver 0.0.0.0:8001

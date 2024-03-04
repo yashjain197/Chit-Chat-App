@@ -10,6 +10,16 @@ const Tab = createBottomTabNavigator();
 
 function HomeScreen({ navigation }){
 
+    const socketConnect = useGlobal(state => state.socketConnect)
+    const socketClose = useGlobal(state => state.socketClose)
+
+    useEffect(() => {
+        socketConnect()
+        return () => {
+            socketClose()
+        }
+    }, [])
+
     useLayoutEffect(() => {
         navigation.setOptions({
           headerShown: false

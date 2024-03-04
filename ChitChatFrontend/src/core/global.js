@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import secure from './secure'
 import api from './api'
 import { SIGNIN } from '../utils/endpoint'
+import utils from './utils'
 
 const useGlobal = create((set) => ({
 
@@ -69,7 +70,21 @@ const useGlobal = create((set) => ({
             authenticated: false,
             user: {}
         }))
+    },
+
+    //---------------------
+    //   Websocket
+    //---------------------
+    socket: null,
+    socketConnect: async () => {
+        const tokens = await secure.get('tokens')
+        utils.log('TOKENS ', tokens)
+    },
+    
+    socketClose: () => {
+        
     }
+
 }))
 
 export default useGlobal
